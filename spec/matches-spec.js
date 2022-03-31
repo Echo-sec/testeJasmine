@@ -202,3 +202,118 @@ describe("Suite de testes toEqual",function(){
             expect(calcularDobro).not.toThrowError();
         });
         });
+
+
+    //falha manual
+
+    describe("Testa a função 'fail' de falha manual", function(){
+        var operacao = function(deveExecuar, callBack){
+            if(deveExecuar){
+                callBack();
+            }
+        };
+        it("nao deve rodar a função de callback",function(){
+            operacao(false, function(){
+                fail("Função de callback foi executada");
+            });
+        });
+    });
+
+
+    //beForceEach
+
+    describe("Suite de testes do beForceEach" ,function(){
+        var contador = 0;
+        beForceEach(function(){
+            contador++
+        });
+
+        it("deve exibir o contaodr com valor 1", function(){
+            expect(contador).toEqual(1);
+        });
+        it("Deve exibir o contador com valor 2", function(){
+            expect(contaodr).toEqual(2);
+        });
+        });
+
+
+        //afterEach
+
+
+    describe("Suite de testes do afterEach" ,function(){
+        var contador = 0;
+        beForceEach(function(){
+            contador++
+        });
+        afterEach(function(){
+            contador = 0
+        });
+
+        it("deve exibir o contaodr com valor 1", function(){
+            expect(contador).toEqual(1);
+        });
+        it("Deve exibir o contador com valor 2", function(){
+            expect(contaodr).toEqual(2);
+        });
+        });
+
+
+        //beforeAll
+
+    describe("Suite de testes do afterEach" ,function(){
+        var contador;
+        beforeAll(function(){
+            contador = 10;
+        });
+        beforeEach(function(){
+            contador++
+        });
+
+        it("deve exibir o contaodr com valor 11", function(){
+            expect(contador).toEqual(11);
+        });
+        it("Deve exibir o contador com valor 12", function(){
+            expect(contaodr).toEqual(12);
+        });
+        });
+
+        //afterAll
+
+        describe("Suite de testes do afterEach" ,function(){
+            var contador;
+            beforeAll(function(){
+                contador = 10;
+            });
+            afterAll(function(){
+                contador++
+            });
+    
+            it("deve exibir o contaodr com valor 10", function(){
+                expect(contador).toEqual(10);
+            });
+            it("Deve exibir o contador com valor 10", function(){
+                expect(contaodr).toEqual(10);
+            });
+            });
+    
+
+            //aninhando suites
+
+            describe("Suite de testes aninhando suites", function(){
+                var contadorExterno = 0;
+                beforeEach(function(){
+                    contadorExterno++;
+                });
+            it("deve ter ubcrementado o contador externo para 1", function(){
+                expect(contadorExterno).toEqual(1);
+            });
+            describe("Suite aninhada á anterior", function(){
+                var contadorInterno = 1;
+                beforeEach(function(){
+                    contadorInterno++;
+                });
+            it("deve conter o valor '2' para ambos contadores", function(){
+                expect(contadorInterno).toEqual(contadorExterno);
+            });
+            });
+            });
